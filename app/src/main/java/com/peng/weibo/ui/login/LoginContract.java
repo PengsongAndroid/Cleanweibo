@@ -1,4 +1,4 @@
-package com.peng.weibo.app.login;
+package com.peng.weibo.ui.login;
 
 /**
  * Created by PS on 2016/7/12.

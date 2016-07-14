@@ -1,4 +1,4 @@
-package com.peng.weibo.app.login;
+package com.peng.weibo.ui.login;
 
 import java.text.SimpleDateFormat;
 
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.peng.weibo.R;
+import com.peng.weibo.data.test;
 import com.peng.weibo.net.PengApi;
 import com.peng.weibo.util.common.Constants;
 import com.peng.weibo.util.common.Logs;
@@ -131,7 +132,22 @@ public class LoginActivity extends AppCompatActivity {
                 .unsubscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .subscribe(new Subscriber<test>() {
+                    @Override
+                    public void onCompleted() {
+                        Logs.d("onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Logs.d("onError : " + e.toString());
+                    }
+
+                    @Override
+                    public void onNext(test s) {
+                        Logs.d("onNext : " + s.toString());
+                    }
+                });
 
 //        PengApi.getInstance().wbService.loginRequest(AccessTokenKeeper.readAccessToken(this).getToken(),
 //                AccessTokenKeeper.readAccessToken(this).getUid())

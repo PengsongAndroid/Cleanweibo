@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- 文字颜色 -->
+    <color name="main_gray_text">#525252</color><!--灰色 主要的文字颜色 -->
+
+    <color name="white">#FFFFFF</color><!--白色 -->
+    <color name="orange">#FFA500</color><!--橙色 -->
+    <color name="grey">#f2f2f2</color><!--灰色 -->
+    <color name="gray">#808080</color><!--灰色 -->
+    <color name="red">#FF0000</color><!--红色 -->
+    <color name="black">#000000</color><!--黑色 -->
 </resources>

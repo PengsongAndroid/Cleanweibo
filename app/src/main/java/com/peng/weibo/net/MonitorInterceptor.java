@@ -35,14 +35,13 @@ public class MonitorInterceptor implements Interceptor{
         } else if (request.method().equals("DELETE")) {
             Logs.d(String.format("DELETE " +  request.url(), time, request.headers(), response.code(), response.headers()));
         }
-        Logs.d("response : " + convertStreamToString(response.body().byteStream()));
+//        Logs.d("response : " + convertStreamToString(response.body().byteStream()));
         return response;
     }
 
     public static String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
-
         String line = null;
         try {
             while ((line = reader.readLine()) != null) {

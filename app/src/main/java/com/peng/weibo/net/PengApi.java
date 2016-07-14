@@ -1,5 +1,8 @@
 package com.peng.weibo.net;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -28,9 +31,13 @@ public class PengApi {
 				.addInterceptor(new MonitorInterceptor())
 				.build();
 
+		Gson gson = new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+				.create();
+
 		retrofit = new Retrofit.Builder().client(okHttpClient)
 				.baseUrl(BASE_URL)
-				.addConverterFactory(GsonConverterFactory.create())
+				.addConverterFactory(GsonConverterFactory.create(gson))
 				.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
 				.build();
 

@@ -20,6 +20,13 @@ public class MyApplication extends Application{
 
     private static List<Activity> activityList = new LinkedList<Activity>();
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+        g_context = getApplicationContext();
+    }
+
     public static MyApplication getInstance() {
         return instance;
     }
