@@ -4,22 +4,23 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import butterknife.ButterKnife;
+
 import com.peng.weibo.MyApplication;
 import com.peng.weibo.util.common.Logs;
 import com.peng.weibo.util.common.Toasts;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by PS on 2016/7/12.
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     /** 日志输出标志 **/
     protected final String TAG = this.getClass().getSimpleName();

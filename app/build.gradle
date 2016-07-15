@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.peng.weibo"
-        minSdkVersion 13
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -23,8 +23,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':weiboSDK')
 
-    compile 'com.android.support:appcompat-v7:23.3.0'
-
     testCompile 'junit:junit:4.12'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'io.reactivex:rxjava:1.1.0'
@@ -34,4 +32,12 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:cardview-v7:23.0.1'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.balysv.materialmenu:material-menu:1.5.4'
+    compile 'com.gordonwong:material-sheet-fab:1.2.1'
+    compile 'it.neokree:MaterialTabs:0.11'
 }

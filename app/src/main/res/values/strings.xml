@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">MyWeibo</string>
+    <string name="app_name">Shaddock</string>
+
+    <string name="tab1">微博</string>
+    <string name="tab2">热门</string>
+    <string name="tab3">资讯</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
