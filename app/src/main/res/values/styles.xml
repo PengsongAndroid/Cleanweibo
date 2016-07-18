@@ -63,10 +63,10 @@
     <!-- tab -->
     <style name="Widget.MaterialSheetFab.TabLayout" parent="">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:theme">@style/Theme.Peng</item>
-        <item name="android:elevation" tools:ignore="NewApi">0dp</item>
+        <item name="android:theme">@style/ThemeOverlay.MaterialSheetFab.ActionBar</item>
+        <item name="android:elevation" tools:ignore="NewApi">@dimen/toolbar_elevation</item>
         <item name="tabMode">fixed</item>
         <item name="tabGravity">fill</item>
     </style>
@@ -87,7 +87,18 @@
         <item name="android:theme">@style/ThemeOverlay.MaterialSheetFab.ActionBar</item>
         <item name="popupTheme">@style/ThemeOverlay.MaterialSheetFab.ActionBar.Popup</item>
         <item name="android:elevation" tools:ignore="NewApi">@dimen/toolbar_elevation</item>
+        <item name="drawerArrowStyle">@style/Base.Widget.AppCompat.DrawerArrowToggle</item>
         <item name="layout_scrollFlags">scroll|enterAlways</item>
+    </style>
+
+    <style name="Widget.Peng.Recylerview" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingTop">@dimen/tab_recylerview_spacing</item>
+        <item name="android:paddingLeft">@dimen/tab_recylerview_spacing</item>
+        <item name="android:paddingRight">@dimen/tab_recylerview_spacing</item>
+        <item name="android:paddingBottom">@dimen/fab_list_spacing</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
 </resources>

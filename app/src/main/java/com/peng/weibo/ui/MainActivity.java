@@ -1,19 +1,21 @@
 package com.peng.weibo.ui;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 
-import com.balysv.materialmenu.MaterialMenuDrawable;
-import com.balysv.materialmenu.MaterialMenuView;
 import com.gordonwong.materialsheetfab.DimOverlayFrameLayout;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
+import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 import com.peng.weibo.R;
 import com.peng.weibo.ui.main.MainPagerAdapter;
 import com.peng.weibo.util.common.Toasts;
@@ -26,25 +28,30 @@ import butterknife.Bind;
  */
 public class MainActivity extends BaseActivity {
 
-//	@Bind(R.id.topbar_content)
-//	TextView topbarContent;
 	@Bind(R.id.drawer_layout)
 	DrawerLayout drawerLayout;
-	@Bind(R.id.material_menu_button)
-	MaterialMenuView materialMenuButton;
 	@Bind(R.id.fab_sheet)
 	CardView fabSheet;
 	@Bind(R.id.fab)
 	Fab fab;
 	@Bind(R.id.overlay)
 	DimOverlayFrameLayout overlay;
+	@Bind(R.id.toolbar)
+	Toolbar toolbar;
 
-	private boolean direction;
+	private int statusBarColor;
 	private MaterialSheetFab materialSheetFab;
+	private ActionBarDrawerToggle drawerToggle;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		drawerToggle.syncState();
 	}
 
 	@Override
@@ -59,87 +66,103 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void initView(View view) {
-		//左上角按钮
-		materialMenuButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				drawerLayout.openDrawer(Gravity.LEFT);
-			}
-		});
 		setTitle(R.string.app_name);
+		setupActionBar();
 		setDrawer();
 		setFab();
 		setTab();
 	}
 
+	private void setupActionBar() {
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
 
-	private void setTab(){
+	private void setTab() {
 		// Setup view pager
 		ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
 		viewpager.setAdapter(new MainPagerAdapter(this, getSupportFragmentManager()));
-//		viewpager.setOffscreenPageLimit(MainPagerAdapter.NUM_ITEMS);
-//		updateFab(viewpager.getCurrentItem());
+		viewpager.setOffscreenPageLimit(MainPagerAdapter.NUM_ITEMS);
+		updateFab(viewpager.getCurrentItem());
 
 		// Setup tab layout
-//		TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-//		tabLayout.setupWithViewPager(viewpager);
-//		viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//			@Override
-//			public void onPageScrolled(int i, float v, int i1) {
-//			}
-//
-//			@Override
-//			public void onPageSelected(int i) {
-//				updateFab(i);
-//			}
-//
-//			@Override
-//			public void onPageScrollStateChanged(int i) {
-//			}
-//		});
-	}
-
-	private void setFab(){
-		//初始化fab展开内容
-		int sheetColor = getResources().getColor(R.color.white);
-		int fabColor = getResources().getColor(R.color.themeAccent);
-		materialSheetFab = new MaterialSheetFab<>(fab, fabSheet, overlay, sheetColor, fabColor);
-	}
-
-	private void setDrawer(){
-		//侧边栏
-		drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-
+		TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+		tabLayout.setupWithViewPager(viewpager);
+		viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
-			public void onDrawerSlide(View drawerView, float slideOffset) {
-				materialMenuButton.setTransformationOffset(MaterialMenuDrawable.AnimationState.BURGER_ARROW, direction ? 2 - slideOffset
-						: slideOffset);
+			public void onPageScrolled(int i, float v, int i1) {
 			}
 
 			@Override
-			public void onDrawerOpened(View drawerView) {
-				direction = true;
+			public void onPageSelected(int i) {
+				updateFab(i);
 			}
 
 			@Override
-			public void onDrawerClosed(View drawerView) {
-				direction = false;
+			public void onPageScrollStateChanged(int i) {
 			}
 		});
 	}
 
+	private void setFab() {
+		// 初始化fab展开内容
+		int sheetColor = getResources().getColor(R.color.white);
+		int fabColor = getResources().getColor(R.color.themeAccent);
+		materialSheetFab = new MaterialSheetFab<>(fab, fabSheet, overlay, sheetColor, fabColor);
+		materialSheetFab.setEventListener(new MaterialSheetFabEventListener() {
+			@Override
+			public void onShowSheet() {
+				// Save current status bar color
+				statusBarColor = getStatusBarColor();
+				// Set darker status bar color to match the dim overlay
+				setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+			}
+
+			@Override
+			public void onHideSheet() {
+				// Restore status bar color
+				setStatusBarColor(statusBarColor);
+			}
+		});
+	}
+
+	private void setDrawer() {
+		drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.app_name, R.string.app_name);
+		// 侧边栏
+		drawerLayout.setDrawerListener(drawerToggle);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			toggleDrawer();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	private void toggleDrawer() {
+		if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
+			drawerLayout.closeDrawer(GravityCompat.START);
+		} else {
+			drawerLayout.openDrawer(GravityCompat.START);
+		}
+	}
+
 	private void updateFab(int selectedPage) {
 		switch (selectedPage) {
-			case MainPagerAdapter.ALL_POS:
-
-				break;
-			case MainPagerAdapter.SHARED_POS:
-				materialSheetFab.showFab(0, -getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin));
-				break;
-			case MainPagerAdapter.FAVORITES_POS:
-			default:
-				materialSheetFab.hideSheetThenFab();
-				break;
+		case MainPagerAdapter.ALL_POS:
+			materialSheetFab.showFab();
+			break;
+		case MainPagerAdapter.SHARED_POS:
+			materialSheetFab.showFab();
+			break;
+		case MainPagerAdapter.FAVORITES_POS:
+		default:
+			materialSheetFab.hideSheetThenFab();
+			break;
 		}
 	}
 
@@ -154,6 +177,19 @@ public class MainActivity extends BaseActivity {
 			materialSheetFab.hideSheet();
 		} else {
 			super.onBackPressed();
+		}
+	}
+
+	private int getStatusBarColor() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			return getWindow().getStatusBarColor();
+		}
+		return 0;
+	}
+
+	private void setStatusBarColor(int color) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			getWindow().setStatusBarColor(color);
 		}
 	}
 }

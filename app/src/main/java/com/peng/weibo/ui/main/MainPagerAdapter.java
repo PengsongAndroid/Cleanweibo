@@ -28,11 +28,11 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case ALL_POS:
-                return null;
+                return new Fragment1().newInstance();
             case SHARED_POS:
-                return null;
+                return new Fragment1().newInstance();
             case FAVORITES_POS:
-                return null;
+                return new Fragment1().newInstance();
             default:
                 return null;
         }
