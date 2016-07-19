@@ -13,7 +13,7 @@ import com.peng.weibo.ui.BaseFragment;
 /**
  * Created by PS on 2016/7/18.
  */
-public class HomePageFragment extends BaseFragment {
+public class HomePageFragment extends BaseFragment implements HomePageContract.View{
 	@Bind(R.id.swiperLayout)
 	SwipeRefreshLayout swiperLayout;
 
@@ -52,5 +52,15 @@ public class HomePageFragment extends BaseFragment {
 				swiperLayout.setRefreshing(false);
 			}
 		});
+	}
+
+	@Override
+	public void isRefresh(boolean flag) {
+
+	}
+
+	@Override
+	public void setPresenter(HomePageContract.Present presenter) {
+
 	}
 }
