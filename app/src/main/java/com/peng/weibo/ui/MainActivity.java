@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import butterknife.Bind;
+
 import com.gordonwong.materialsheetfab.DimOverlayFrameLayout;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
@@ -20,8 +22,6 @@ import com.peng.weibo.R;
 import com.peng.weibo.ui.main.MainPagerAdapter;
 import com.peng.weibo.util.common.Toasts;
 import com.peng.weibo.widget.fabsheet.Fab;
-
-import butterknife.Bind;
 
 /**
  * Created by PS on 2016/7/13.
@@ -38,6 +38,8 @@ public class MainActivity extends BaseActivity {
 	DimOverlayFrameLayout overlay;
 	@Bind(R.id.toolbar)
 	Toolbar toolbar;
+	@Bind(R.id.viewpager)
+	ViewPager viewpager;
 
 	private int statusBarColor;
 	private MaterialSheetFab materialSheetFab;
@@ -80,7 +82,6 @@ public class MainActivity extends BaseActivity {
 
 	private void setTab() {
 		// Setup view pager
-		ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
 		viewpager.setAdapter(new MainPagerAdapter(this, getSupportFragmentManager()));
 		viewpager.setOffscreenPageLimit(MainPagerAdapter.NUM_ITEMS);
 		updateFab(viewpager.getCurrentItem());
@@ -192,4 +193,5 @@ public class MainActivity extends BaseActivity {
 			getWindow().setStatusBarColor(color);
 		}
 	}
+
 }

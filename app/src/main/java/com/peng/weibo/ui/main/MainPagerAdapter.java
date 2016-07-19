@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.peng.weibo.R;
+import com.peng.weibo.ui.main.homePage.HomePageFragment;
 
 /**
  * Created by PS on 2016/7/15.
@@ -28,11 +29,11 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case ALL_POS:
-                return new Fragment1().newInstance();
+                return new HomePageFragment().newInstance();
             case SHARED_POS:
-                return new Fragment1().newInstance();
+                return new HomePageFragment().newInstance();
             case FAVORITES_POS:
-                return new Fragment1().newInstance();
+                return new HomePageFragment().newInstance();
             default:
                 return null;
         }
