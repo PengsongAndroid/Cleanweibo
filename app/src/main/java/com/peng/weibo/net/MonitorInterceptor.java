@@ -1,6 +1,6 @@
 package com.peng.weibo.net;
 
-import com.peng.weibo.util.common.Logs;
+import com.peng.weibo.util.tools.Logs;
 
 import java.io.BufferedReader;
 import java.io.IOException;

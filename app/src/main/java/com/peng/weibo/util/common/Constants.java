@@ -10,6 +10,9 @@ public interface Constants {
     /**  登录后获取到的token值 后面的请求都需要用到   */
     public static String APP_Token = "";
 
+    /**  登录后获取到的token值的过期时间   */
+    public static String APP_Token_Date = "";
+
     /** 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY */
     public static final String APP_KEY      = "2844976289";
 

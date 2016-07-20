@@ -13,7 +13,7 @@ import rx.subjects.Subject;
 
 import android.support.annotation.NonNull;
 
-import com.peng.weibo.util.common.Logs;
+import com.peng.weibo.util.tools.Logs;
 
 
 /**

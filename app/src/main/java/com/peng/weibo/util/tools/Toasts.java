@@ -1,4 +1,4 @@
-package com.peng.weibo.util.common;
+package com.peng.weibo.util.tools;
 
 import android.widget.Toast;
 

@@ -29,7 +29,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.titleTextView.setText("测试");
+        holder.titleTextView.setText("");
     }
 
     @Override

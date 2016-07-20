@@ -70,7 +70,6 @@ public class AccessTokenKeeper {
         if (null == context) {
             return;
         }
-
         SharedPreferences pref = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_APPEND);
         Editor editor = pref.edit();
         editor.clear();

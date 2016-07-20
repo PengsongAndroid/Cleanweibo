@@ -20,7 +20,7 @@ import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 import com.peng.weibo.R;
 import com.peng.weibo.ui.main.MainPagerAdapter;
-import com.peng.weibo.util.common.Toasts;
+import com.peng.weibo.util.tools.Toasts;
 import com.peng.weibo.widget.fabsheet.Fab;
 
 /**

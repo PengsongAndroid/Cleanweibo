@@ -1,4 +1,4 @@
-package com.peng.weibo.util.common;
+package com.peng.weibo.util.tools;
 
 /**
  * Copyright 2014 Zhenguo Jin

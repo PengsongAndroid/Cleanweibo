@@ -13,19 +13,18 @@ import com.peng.weibo.ui.BaseFragment;
 /**
  * Created by PS on 2016/7/18.
  */
-public class HomePageFragment extends BaseFragment implements HomePageContract.View{
+public class HomePageFragment extends BaseFragment implements HomePageContract.View {
 	@Bind(R.id.swiperLayout)
 	SwipeRefreshLayout swiperLayout;
 
-	 @Bind(R.id.homeRecyclerView)
-	 RecyclerView homeRecyclerview;
+	@Bind(R.id.homeRecyclerView)
+	RecyclerView homeRecyclerview;
 
 	private LinearLayoutManager linearLayoutManager;
 
 	public static HomePageFragment newInstance() {
 		return new HomePageFragment();
 	}
-
 
 	@Override
 	protected int getLayoutResId() {
@@ -34,11 +33,11 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 
 	@Override
 	public void initView(View view) {
-		//创建manager
+		// 创建manager
 		linearLayoutManager = new LinearLayoutManager(getActivity());
 		linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 		homeRecyclerview.setLayoutManager(linearLayoutManager);
-		//设置adapter
+		// 设置adapter
 		homeRecyclerview.setAdapter(new HomePageAdapter(getContext(), 10));
 		swiperLayout.setColorSchemeColors(R.color.colorPrimary);
 		swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

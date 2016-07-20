@@ -1,6 +1,5 @@
 package com.peng.weibo.ui;
 
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,8 +13,9 @@ import android.view.WindowManager;
 import butterknife.ButterKnife;
 
 import com.peng.weibo.MyApplication;
-import com.peng.weibo.util.common.Logs;
-import com.peng.weibo.util.common.Toasts;
+import com.peng.weibo.util.task.RxBus;
+import com.peng.weibo.util.tools.Logs;
+import com.peng.weibo.util.tools.Toasts;
 
 /**
  * Created by PS on 2016/7/12.
@@ -142,6 +142,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        RxBus.$().unregister(this);
         Logs.d(TAG, "onDestroy()");
     }
 
