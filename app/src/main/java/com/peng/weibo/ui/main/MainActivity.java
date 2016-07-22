@@ -1,4 +1,4 @@
-package com.peng.weibo.ui;
+package com.peng.weibo.ui.main;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import com.gordonwong.materialsheetfab.DimOverlayFrameLayout;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 import com.peng.weibo.R;
+import com.peng.weibo.ui.BaseActivity;
 import com.peng.weibo.ui.main.MainPagerAdapter;
 import com.peng.weibo.util.tools.Toasts;
 import com.peng.weibo.widget.fabsheet.Fab;

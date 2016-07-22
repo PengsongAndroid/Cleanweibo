@@ -11,7 +11,6 @@ import rx.schedulers.Schedulers;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -20,7 +19,7 @@ import com.peng.weibo.R;
 import com.peng.weibo.data.test;
 import com.peng.weibo.net.PengApi;
 import com.peng.weibo.ui.BaseActivity;
-import com.peng.weibo.ui.MainActivity;
+import com.peng.weibo.ui.main.MainActivity;
 import com.peng.weibo.util.common.Constants;
 import com.peng.weibo.util.task.CommonEvent;
 import com.peng.weibo.util.task.RxBus;
@@ -76,6 +75,7 @@ public class LoginActivity extends BaseActivity {
                 Logs.i("netTime : " + netDate.toString() + " weiboDate " + weiboDate);
                 if (weiboDate.after(netDate)){
                     startActivity(new Intent(this, MainActivity.class));
+                    finish();
                     return;
                 } else {
                     mWeiboAuth.anthorize(new AuthListener());
@@ -119,6 +119,7 @@ public class LoginActivity extends BaseActivity {
                 // 保存 Token 到 SharedPreferences
                 AccessTokenKeeper.writeAccessToken(LoginActivity.this, mAccessToken);
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
 //                Toast.makeText(LoginActivity.this, R.string.weibosdk_demo_toast_auth_success, Toast.LENGTH_SHORT).show();
             } else {
                 // 当您注册的应用程序签名不正确时，就会收到 Code，请确保签名正确

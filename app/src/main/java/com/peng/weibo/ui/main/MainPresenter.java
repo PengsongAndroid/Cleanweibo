@@ -1,6 +1,4 @@
-package com.peng.weibo.ui.main.homePage;
-
-import android.view.View;
+package com.peng.weibo.ui.main;
 
 import com.peng.weibo.data.test;
 import com.peng.weibo.net.PengApi;
@@ -12,19 +10,14 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by PS on 2016/7/19.
+ * Created by PS on 2016/7/22.
  */
-public class HomePagePresenter implements HomePageContract.Present{
+public class MainPresenter implements MainContract.Present{
 
-    private HomePageContract.View view;
-
-    public HomePagePresenter(HomePageContract.View view){
-        this.view = view;
-    }
+    private MainContract.View view;
 
     @Override
     public void getUser() {
-        view.startRefresh();
         PengApi.getInstance().wbService.loginRequest(AccessTokenKeeper.readAccessToken(view.getViewContext()).getToken(),
                 AccessTokenKeeper.readAccessToken(view.getViewContext()).getUid())
                 .unsubscribeOn(Schedulers.io())
@@ -34,7 +27,6 @@ public class HomePagePresenter implements HomePageContract.Present{
                     @Override
                     public void onCompleted() {
                         Logs.d("onCompleted");
-                        view.stopRefresh();
                     }
 
                     @Override
@@ -45,14 +37,13 @@ public class HomePagePresenter implements HomePageContract.Present{
                     @Override
                     public void onNext(test s) {
                         Logs.d("onNext : " + s.toString());
-
                     }
                 });
     }
 
     @Override
     public void onDestroy() {
-        view = null;
+
     }
 
     @Override

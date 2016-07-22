@@ -1,5 +1,6 @@
 package com.peng.weibo.ui.main.homePage;
 
+import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.peng.weibo.ui.BaseFragment;
  * Created by PS on 2016/7/18.
  */
 public class HomePageFragment extends BaseFragment implements HomePageContract.View {
+
 	@Bind(R.id.swiperLayout)
 	SwipeRefreshLayout swiperLayout;
 
@@ -39,27 +41,65 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 		homeRecyclerview.setLayoutManager(linearLayoutManager);
 		// 设置adapter
 		homeRecyclerview.setAdapter(new HomePageAdapter(getContext(), 10));
-		swiperLayout.setColorSchemeColors(R.color.colorPrimary);
+		swiperLayout.setColorSchemeResources(R.color.refresh_progress_2,
+				R.color.refresh_progress_3);
 		swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				swiperLayout.setRefreshing(false);
+				setRefreshing(swiperLayout.isRefreshing());
 			}
 		});
 	}
 
-	@Override
-	public void isRefresh(boolean flag) {
+	public void requestDataRefresh() {
 
+	}
+
+	public void setRefreshing(boolean isRefresh){
+		if (isRefresh){
+			swiperLayout.setEnabled(false);
+			swiperLayout.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					swiperLayout.setEnabled(true);
+					swiperLayout.setRefreshing(false);
+				}
+			}, 1000);
+//			swiperLayout.setRefreshing(false);
+		} else {
+			swiperLayout.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					swiperLayout.setRefreshing(false);
+				}
+			}, 1000);
+		}
 	}
 
 	@Override
 	public void setPresenter(HomePageContract.Present presenter) {
 
+	}
+
+	@Override
+	public void startRefresh() {
+		swiperLayout.setRefreshing(true);
+		swiperLayout.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				swiperLayout.setRefreshing(false);
+			}
+		}, 2000);
+	}
+
+	@Override
+	public void stopRefresh() {
+		swiperLayout.setRefreshing(false);
+		swiperLayout.setEnabled(true);
+	}
+
+	@Override
+	public Context getViewContext() {
+		return getContext();
 	}
 }

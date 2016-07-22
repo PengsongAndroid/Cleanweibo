@@ -1,5 +1,7 @@
 package com.peng.weibo.ui.main.homePage;
 
+import android.content.Context;
+
 import com.peng.weibo.ui.BasePresenter;
 import com.peng.weibo.ui.BaseView;
 
@@ -9,11 +11,13 @@ import com.peng.weibo.ui.BaseView;
 public interface HomePageContract {
 
     interface View extends BaseView<Present>{
-        void isRefresh(boolean flag);
+        void startRefresh();
+        void stopRefresh();
+        Context getViewContext();
     }
 
     interface Present extends BasePresenter{
-
+        void getUser();
     }
 
 }
