@@ -1,6 +1,6 @@
-package com.peng.weibo.ui.main.hotWeibo;
+package com.peng.weibo.ui.main.publicWeibo;
 
-import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +16,7 @@ import butterknife.Bind;
 /**
  * Created by PS on 2016/7/18.
  */
-public class HotWeiboFragment extends BaseFragment implements HomePageContract.View {
+public class publicWeiboFragment extends BaseFragment implements HomePageContract.View {
     @Bind(R.id.swiperLayout)
     SwipeRefreshLayout swiperLayout;
 
@@ -25,8 +25,8 @@ public class HotWeiboFragment extends BaseFragment implements HomePageContract.V
 
     private LinearLayoutManager linearLayoutManager;
 
-    public static HotWeiboFragment newInstance() {
-        return new HotWeiboFragment();
+    public static publicWeiboFragment newInstance() {
+        return new publicWeiboFragment();
     }
 
     @Override
@@ -92,6 +92,11 @@ public class HotWeiboFragment extends BaseFragment implements HomePageContract.V
     public void stopRefresh() {
         swiperLayout.setRefreshing(false);
         swiperLayout.setEnabled(true);
+    }
+
+    @Override
+    public Context getViewContext() {
+        return null;
     }
 
     @Override

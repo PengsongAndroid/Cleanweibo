@@ -1,8 +1,11 @@
 package com.peng.weibo.ui.main;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -12,6 +15,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import butterknife.Bind;
 
@@ -19,15 +23,17 @@ import com.gordonwong.materialsheetfab.DimOverlayFrameLayout;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 import com.peng.weibo.R;
+import com.peng.weibo.data.test;
 import com.peng.weibo.ui.BaseActivity;
-import com.peng.weibo.ui.main.MainPagerAdapter;
+import com.peng.weibo.util.tools.Logs;
 import com.peng.weibo.util.tools.Toasts;
 import com.peng.weibo.widget.fabsheet.Fab;
+import com.peng.weibo.widget.imageView.CircleImageView;
 
 /**
  * Created by PS on 2016/7/13.
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainContract.View {
 
 	@Bind(R.id.drawer_layout)
 	DrawerLayout drawerLayout;
@@ -41,10 +47,21 @@ public class MainActivity extends BaseActivity {
 	Toolbar toolbar;
 	@Bind(R.id.viewpager)
 	ViewPager viewpager;
+	@Bind(R.id.navigation_view)
+	NavigationView navigationView;
+
+	private CircleImageView userHeadImg;
+	private TextView userNameTv;
+	private TextView userDescriptionTv;
+	private TextView userStatusesCountTv;
+	private TextView userFriendsCountTv;
+	private TextView userFollowersCountTv;
 
 	private int statusBarColor;
 	private MaterialSheetFab materialSheetFab;
 	private ActionBarDrawerToggle drawerToggle;
+
+	private MainContract.Present present;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,11 +86,18 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void initView(View view) {
+		setPresenter(null);
 		setTitle(R.string.app_name);
 		setupActionBar();
 		setDrawer();
 		setFab();
 		setTab();
+		initNavigationView();
+		present.getUser();
+	}
+
+	public void setData() {
+
 	}
 
 	private void setupActionBar() {
@@ -134,6 +158,35 @@ public class MainActivity extends BaseActivity {
 		drawerLayout.setDrawerListener(drawerToggle);
 	}
 
+	private void initNavigationView(){
+		userHeadImg = (CircleImageView) navigationView.findViewById(R.id.head_circleView);
+		userNameTv = (TextView) navigationView.findViewById(R.id.user_name);
+		userDescriptionTv = (TextView) navigationView.findViewById(R.id.user_description);
+		userStatusesCountTv = (TextView) navigationView.findViewById(R.id.user_statuses_count);
+		userFriendsCountTv = (TextView) navigationView.findViewById(R.id.user_friends_count);
+		userFollowersCountTv = (TextView) navigationView.findViewById(R.id.user_followers_count);
+	}
+
+	@Override
+	public void setDrawerData(test user) {
+		userNameTv.setText(user.getName() + "");
+		userDescriptionTv.setText(user.getDescription() + "");
+		userStatusesCountTv.setText(String.valueOf(user.getStatuses_count()) + "");
+		userFriendsCountTv.setText(String.valueOf(user.getFriends_count()) + "");
+		userFollowersCountTv.setText(String.valueOf(user.getFollowers_count()) + "");
+		present.loadHeadPic(user.getAvatar_large());
+	}
+
+	@Override
+	public void setHeadPic(Bitmap bitmap) {
+		//获取头像
+		userHeadImg.setImageBitmap(bitmap);
+	}
+
+	public void headClick(View view){
+		Logs.e("headClick");
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -169,6 +222,16 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override
+	public Context getViewContext() {
+		return getApplicationContext();
+	}
+
+	@Override
+	public void setPresenter(MainContract.Present presenter) {
+		this.present = new MainPresenter(this);
+	}
+
+	@Override
 	public void back(View view) {
 		Toasts.showText("返回");
 	}
@@ -195,4 +258,9 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		System.gc();
+	}
 }

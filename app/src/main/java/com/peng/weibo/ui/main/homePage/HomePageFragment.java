@@ -24,6 +24,8 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 
 	private LinearLayoutManager linearLayoutManager;
 
+	private HomePageContract.Present presenter;
+
 	public static HomePageFragment newInstance() {
 		return new HomePageFragment();
 	}
@@ -65,7 +67,6 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 					swiperLayout.setRefreshing(false);
 				}
 			}, 1000);
-//			swiperLayout.setRefreshing(false);
 		} else {
 			swiperLayout.postDelayed(new Runnable() {
 				@Override
@@ -78,7 +79,7 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 
 	@Override
 	public void setPresenter(HomePageContract.Present presenter) {
-
+		this.presenter = new HomePagePresenter(this);
 	}
 
 	@Override

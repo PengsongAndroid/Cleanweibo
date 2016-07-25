@@ -6,6 +6,7 @@ import com.peng.weibo.data.entity.Status;
  * Created by PS on 2016/7/14.
  */
 public class test {
+
 	private String id;
 
 	private String idstr;

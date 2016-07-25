@@ -1,5 +1,6 @@
 package com.peng.weibo.ui.main.Unknown;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -97,5 +98,10 @@ public class FuliFragment extends BaseFragment implements HomePageContract.View 
     public void stopRefresh() {
         swiperLayout.setRefreshing(false);
         swiperLayout.setEnabled(true);
+    }
+
+    @Override
+    public Context getViewContext() {
+        return null;
     }
 }
