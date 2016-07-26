@@ -56,7 +56,7 @@ public abstract class BaseFragment extends Fragment{
                 Logs.d(TAG, "setUserVisibleHint init");
             } else {
                 Logs.d(TAG, "setUserVisibleHint no init");
-                startRefresh();
+//                startRefresh();
                 isInit = true;
             }
         }

@@ -4,6 +4,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
 
+import com.peng.weibo.data.entity.list.StatusList;
 import com.peng.weibo.data.test;
 
 /**
@@ -35,8 +36,8 @@ public interface WbHttpService {
 	 *
 	 */
 	@GET("/2/statuses/public_timeline.json")
-	Observable<test> getPublicWb(@Query("access_token") String token, @Query("count") int count, @Query("page") int page,
-			@Query("base_app") boolean base_app);
+	Observable<StatusList> getPublicWb(@Query("access_token") String token, @Query("count") int count, @Query("page") int page,
+			@Query("base_app") int base_app);
 
 	/**
 	 * 获取当前登录用户及其所关注用户的最新微博。
@@ -59,8 +60,48 @@ public interface WbHttpService {
 	 *            返回值中user字段开关，false：返回完整user字段、true：user字段仅返回user_id，默认为false
 	 */
 	@GET("/2/statuses/home_timeline.json")
-	Observable<test> getHomeWb(@Query("access_token") String token, @Query("since_id") long since_id, @Query("max_id") long max_id,
-			@Query("count") int count, @Query("page") int page, @Query("base_app") boolean base_app,
-            @Query("featureType") int featureType, @Query("trim_user") boolean trim_user);
+	Observable<StatusList> getHomeWb(@Query("access_token") String token, @Query("since_id") long since_id, @Query("max_id") long max_id,
+									 @Query("count") int count, @Query("page") int page, @Query("base_app") boolean base_app,
+									 @Query("featureType") int featureType, @Query("trim_user") boolean trim_user);
+
+	/**
+	 * 按天返回热门微博转发榜的微博列表。
+	 *
+	 * @param count    返回的记录条数，最大不超过50，默认为20
+	 * @param base_app 是否只获取当前应用的数据。false为否（所有数据），true为是（仅当前应用），默认为false
+	 *
+	 */
+	@GET("/2/statuses/hot/repost_daily.json")
+	Observable<StatusList> getHotWbByDayAndRepost(@Query("count") int count, @Query("base_app") int base_app);
+
+	/**
+	 * 按周返回热门微博转发榜的微博列表。
+	 *
+	 * @param count    返回的记录条数，最大不超过50，默认为20
+	 * @param base_app 是否只获取当前应用的数据。false为否（所有数据），true为是（仅当前应用），默认为false
+	 *
+	 */
+	@GET("/2/statuses/hot/repost_weekly.json.json")
+	Observable<StatusList> getHotWbByWeekAndRepost(@Query("count") int count, @Query("base_app") int base_app);
+
+	/**
+	 * 按天返回热门微博评论榜的微博列表。
+	 *
+	 * @param count    返回的记录条数，最大不超过50，默认为20
+	 * @param base_app 是否只获取当前应用的数据。false为否（所有数据），true为是（仅当前应用），默认为false
+	 *
+	 */
+	@GET("/2/statuses/hot/comments_daily.json.json")
+	Observable<StatusList> getHotWbByDayAndComment(@Query("count") int count, @Query("base_app") int base_app);
+
+	/**
+	 * 按周返回热门微博评论榜的微博列表。
+	 *
+	 * @param count    返回的记录条数，最大不超过50，默认为20
+	 * @param base_app 是否只获取当前应用的数据。false为否（所有数据），true为是（仅当前应用），默认为false
+	 *
+	 */
+	@GET("/2/statuses/hot/comments_weekly.json")
+	Observable<StatusList> getHotWbByWeekAndComment(@Query("count") int count, @Query("base_app") int base_app);
 
 }

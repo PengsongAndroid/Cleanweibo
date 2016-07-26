@@ -1,4 +1,4 @@
-package com.peng.weibo.ui.main.publicWeibo;
+package com.peng.weibo.ui.main.hotWeibo;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,50 +9,54 @@ import android.view.View;
 import com.peng.weibo.R;
 import com.peng.weibo.ui.BaseFragment;
 import com.peng.weibo.ui.main.homePage.HomePageAdapter;
-import com.peng.weibo.ui.main.homePage.HomePageContract;
 
 import butterknife.Bind;
 
 /**
  * Created by PS on 2016/7/18.
  */
-public class publicWeiboFragment extends BaseFragment implements HomePageContract.View {
-    @Bind(R.id.swiperLayout)
+public class hotWeiboFragment extends BaseFragment implements hotWeiboContract.View {
+
+    @Bind(R.id.publicWbSwiperLayout)
     SwipeRefreshLayout swiperLayout;
 
-    @Bind(R.id.homeRecyclerView)
-    RecyclerView homeRecyclerview;
+    @Bind(R.id.publicWbRecyclerView)
+    RecyclerView recyclerview;
 
     private LinearLayoutManager linearLayoutManager;
 
-    public static publicWeiboFragment newInstance() {
-        return new publicWeiboFragment();
+    private hotWeiboContract.Present present;
+
+    public static hotWeiboFragment newInstance() {
+        return new hotWeiboFragment();
     }
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.main_tab1;
+        return R.layout.main_public_wb_layout;
     }
 
     @Override
     public void initView(View view) {
+        setPresenter(null);
         // 创建manager
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        homeRecyclerview.setLayoutManager(linearLayoutManager);
+        recyclerview.setLayoutManager(linearLayoutManager);
         // 设置adapter
-        homeRecyclerview.setAdapter(new HomePageAdapter(getContext(), 10));
+        recyclerview.setAdapter(new HomePageAdapter(getContext(), 10));
         swiperLayout.setColorSchemeResources(R.color.refresh_progress_2,
                 R.color.refresh_progress_3);
         swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                setRefreshing(swiperLayout.isRefreshing());
+                present.getHotWeibo(10, 1, false);
             }
         });
     }
 
-    public void requestDataRefresh() {
+    @Override
+    public void setHotWeiboData() {
 
     }
 
@@ -66,7 +70,6 @@ public class publicWeiboFragment extends BaseFragment implements HomePageContrac
                     swiperLayout.setRefreshing(false);
                 }
             }, 1000);
-//			swiperLayout.setRefreshing(false);
         } else {
             swiperLayout.postDelayed(new Runnable() {
                 @Override
@@ -80,12 +83,7 @@ public class publicWeiboFragment extends BaseFragment implements HomePageContrac
     @Override
     public void startRefresh() {
         swiperLayout.setRefreshing(true);
-        swiperLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swiperLayout.setRefreshing(false);
-            }
-        }, 1000);
+        swiperLayout.setEnabled(false);
     }
 
     @Override
@@ -96,11 +94,11 @@ public class publicWeiboFragment extends BaseFragment implements HomePageContrac
 
     @Override
     public Context getViewContext() {
-        return null;
+        return getActivity().getApplicationContext();
     }
 
     @Override
-    public void setPresenter(HomePageContract.Present presenter) {
-
+    public void setPresenter(hotWeiboContract.Present presenter) {
+        this.present = new hotWeiboPresent(this);
     }
 }

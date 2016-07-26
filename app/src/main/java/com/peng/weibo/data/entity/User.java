@@ -54,14 +54,17 @@ public class User implements Parcelable {
      * 用户头像地址，50×50像素
      */
     public String profile_image_url;
+
+    /**
+     * 用户的个性化背景(手机)
+     */
+    public String cover_image_phone;
+
     /**
      * 用户的微博统一URL地址
      */
     public String profile_url;
-//    /**
-//     * 用户的个性化背景(手机)
-//     */
-//    public String cover_image_phone;
+
 //    /**
 //     * 用户的个性化背景
 //     */

@@ -35,7 +35,8 @@ public class MonitorInterceptor implements Interceptor{
         } else if (request.method().equals("DELETE")) {
             Logs.d(String.format("DELETE " +  request.url(), time, request.headers(), response.code(), response.headers()));
         }
-//        Logs.d("response : " + convertStreamToString(response.body().byteStream()));
+//        InputStream inputStream = response.body().byteStream();
+//        Logs.d("response : " + convertStreamToString(inputStream));
         return response;
     }
 
@@ -47,11 +48,13 @@ public class MonitorInterceptor implements Interceptor{
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
+            reader.reset();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             try {
-                is.close();
+                is.reset();
             } catch (IOException e) {
                 e.printStackTrace();
             }

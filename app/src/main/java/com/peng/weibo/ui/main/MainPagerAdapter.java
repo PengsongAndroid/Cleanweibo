@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.peng.weibo.R;
 import com.peng.weibo.ui.main.Unknown.FuliFragment;
 import com.peng.weibo.ui.main.homePage.HomePageFragment;
-import com.peng.weibo.ui.main.publicWeibo.publicWeiboFragment;
+import com.peng.weibo.ui.main.hotWeibo.hotWeiboFragment;
 
 /**
  * Created by PS on 2016/7/15.
@@ -33,7 +33,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
             case ALL_POS:
                 return new HomePageFragment().newInstance();
             case SHARED_POS:
-                return new publicWeiboFragment().newInstance();
+                return new hotWeiboFragment().newInstance();
             case FAVORITES_POS:
                 return new FuliFragment().newInstance();
             default:
