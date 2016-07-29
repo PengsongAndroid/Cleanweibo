@@ -35,8 +35,8 @@ public class MonitorInterceptor implements Interceptor{
         } else if (request.method().equals("DELETE")) {
             Logs.d(String.format("DELETE " +  request.url(), time, request.headers(), response.code(), response.headers()));
         }
-//        InputStream inputStream = response.body().byteStream();
-//        Logs.d("response : " + convertStreamToString(inputStream));
+        InputStream inputStream = response.body().byteStream();
+        Logs.d("response : " + convertStreamToString(inputStream));
         return response;
     }
 

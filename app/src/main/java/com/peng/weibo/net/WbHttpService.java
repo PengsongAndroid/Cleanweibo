@@ -61,8 +61,8 @@ public interface WbHttpService {
 	 */
 	@GET("/2/statuses/home_timeline.json")
 	Observable<StatusList> getHomeWb(@Query("access_token") String token, @Query("since_id") long since_id, @Query("max_id") long max_id,
-									 @Query("count") int count, @Query("page") int page, @Query("base_app") boolean base_app,
-									 @Query("featureType") int featureType, @Query("trim_user") boolean trim_user);
+									 @Query("count") int count, @Query("page") int page, @Query("base_app") int base_app,
+									 @Query("featureType") int featureType, @Query("trim_user") int trim_user);
 
 	/**
 	 * 按天返回热门微博转发榜的微博列表。

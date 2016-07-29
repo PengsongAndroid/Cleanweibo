@@ -17,8 +17,8 @@ public interface HomePageContract {
     }
 
     interface Present extends BasePresenter{
-        void getHomeWb(long since_id, long max_id, int count, int page, boolean base_app, int featureType,
-                       boolean trim_user);
+        void getHomeWb(long since_id, long max_id, int count, int page, int base_app, int featureType,
+                       int trim_user);
     }
 
 }

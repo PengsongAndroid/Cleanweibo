@@ -22,7 +22,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_list_item, parent,
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.weibo_status_item, parent,
                 false);
         return new ViewHolder(v);
     }

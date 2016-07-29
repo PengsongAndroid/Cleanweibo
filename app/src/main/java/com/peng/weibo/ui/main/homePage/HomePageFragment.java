@@ -37,6 +37,7 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 
 	@Override
 	public void initView(View view) {
+		setPresenter(null);
 		// 创建manager
 		linearLayoutManager = new LinearLayoutManager(getActivity());
 		linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -48,7 +49,7 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 		swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				setRefreshing(swiperLayout.isRefreshing());
+				presenter.getHomeWb(0, 0, 5, 1, 0, 0, 0);
 			}
 		});
 	}
@@ -103,4 +104,5 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 	public Context getViewContext() {
 		return getContext();
 	}
+
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:layout_marginBottom="8dp"
+    android:orientation="vertical">
+
+    <include layout="@layout/weibo_status_item_top" />
+
+    <TextView
+        android:id="@+id/weibo_status_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:lineSpacingExtra="3dp"
+        android:text="#知政#【财政部谈跨境电商新政：不会给消费者带来太大负担】财政部关税司有关负责人坦承，新政客观上会提高消费者总体税负水平。但其指出，在税率设置上暂给予一定优惠，具体而言有升有降。新政有利于电商化解部分成本，对大众消费品价格总体影响有限，不会给消费者带来太大负担。http://t.cn/RqXsr16"
+        android:textColor="@color/textGrey"
+        android:textSize="@dimen/text16" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/weibo_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:paddingBottom="10dp" />
+
+    <view
+        android:id="@+id/weibo_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#e5e5e5"
+        android:visibility="gone" />
+
+    <include layout="@layout/weibo_status_item_bottom" />
+
+</LinearLayout>

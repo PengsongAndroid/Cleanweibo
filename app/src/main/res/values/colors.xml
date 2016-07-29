@@ -23,4 +23,7 @@
     <color name="refresh_progress_1">#FFFFFF</color>
     <color name="refresh_progress_2">#00B0FF</color>
     <color name="refresh_progress_3">#FFEB3B</color>
+
+    <color name="weibo_vip">#F46200</color>
+
 </resources>

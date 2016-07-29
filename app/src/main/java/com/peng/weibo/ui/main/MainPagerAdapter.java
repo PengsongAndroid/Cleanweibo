@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.peng.weibo.R;
-import com.peng.weibo.ui.main.Unknown.FuliFragment;
+import com.peng.weibo.ui.main.fuli.FuliFragment;
 import com.peng.weibo.ui.main.homePage.HomePageFragment;
 import com.peng.weibo.ui.main.hotWeibo.hotWeiboFragment;
 
