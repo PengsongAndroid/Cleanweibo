@@ -24,6 +24,7 @@ public class HomePagePresenter implements HomePageContract.Present{
     @Override
     public void getHomeWb(long since_id, long max_id, int count, int page, int base_app, int featureType,
                           int trim_user) {
+        view.startRefresh();
         PengApi.getInstance().wbService.getHomeWb(AccessTokenKeeper.readAccessToken(view.getViewContext()).getToken(),
                 0, 0, 5, 1, 0, 0, 0)
                 .unsubscribeOn(Schedulers.io())
@@ -33,6 +34,7 @@ public class HomePagePresenter implements HomePageContract.Present{
                     @Override
                     public void onCompleted() {
                         Logs.d("onCompleted");
+                        view.stopRefresh();
                     }
 
                     @Override
@@ -43,6 +45,7 @@ public class HomePagePresenter implements HomePageContract.Present{
                     @Override
                     public void onNext(StatusList s) {
                         Logs.d("onNext : " + s.toString());
+                        view.setData(s);
                     }
                 });
 

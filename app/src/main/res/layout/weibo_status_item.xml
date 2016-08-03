@@ -22,19 +22,19 @@
         android:textSize="@dimen/text16" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/weibo_image"
+        android:id="@+id/weibo_status_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:paddingBottom="10dp" />
 
-    <view
+    <View
         android:id="@+id/weibo_line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#e5e5e5"
-        android:visibility="gone" />
+        android:background="@color/textGrey"
+        android:visibility="visible" />
 
     <include layout="@layout/weibo_status_item_bottom" />
 

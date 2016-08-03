@@ -16,7 +16,7 @@ import butterknife.Bind;
 /**
  * Created by PS on 2016/7/18.
  */
-public class FuliFragment extends BaseFragment implements HomePageContract.View {
+public class FuliFragment extends BaseFragment implements FuliContract.View {
     @Bind(R.id.swiperLayout)
     SwipeRefreshLayout swiperLayout;
 
@@ -78,11 +78,6 @@ public class FuliFragment extends BaseFragment implements HomePageContract.View 
     }
 
     @Override
-    public void setPresenter(HomePageContract.Present presenter) {
-
-    }
-
-    @Override
     public void startRefresh() {
         swiperLayout.setRefreshing(true);
         swiperLayout.postDelayed(new Runnable() {
@@ -93,14 +88,9 @@ public class FuliFragment extends BaseFragment implements HomePageContract.View 
         }, 1000);
     }
 
-    @Override
-    public void stopRefresh() {
-        swiperLayout.setRefreshing(false);
-        swiperLayout.setEnabled(true);
-    }
 
     @Override
-    public Context getViewContext() {
-        return null;
+    public void setPresenter(FuliContract.Present presenter) {
+
     }
 }

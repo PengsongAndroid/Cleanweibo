@@ -33,7 +33,7 @@
                 android:src="@mipmap/weibo_status_redirect_icon" />
 
             <TextView
-                android:id="@+id/redirect"
+                android:id="@+id/weibo_status_redirect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -68,7 +68,7 @@
                 android:src="@mipmap/weibo_status_comment_icon" />
 
             <TextView
-                android:id="@+id/comment"
+                android:id="@+id/weibo_status_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -102,7 +102,7 @@
                 android:src="@mipmap/weibo_status_unlike_icon" />
 
             <TextView
-                android:id="@+id/feedlike"
+                android:id="@+id/weibo_status_feedlike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

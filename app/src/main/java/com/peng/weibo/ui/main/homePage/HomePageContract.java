@@ -2,6 +2,7 @@ package com.peng.weibo.ui.main.homePage;
 
 import android.content.Context;
 
+import com.peng.weibo.data.entity.list.StatusList;
 import com.peng.weibo.ui.BasePresenter;
 import com.peng.weibo.ui.BaseView;
 
@@ -14,6 +15,7 @@ public interface HomePageContract {
         void startRefresh();
         void stopRefresh();
         Context getViewContext();
+        void setData(StatusList data);
     }
 
     interface Present extends BasePresenter{

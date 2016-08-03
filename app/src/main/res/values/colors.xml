@@ -25,5 +25,7 @@
     <color name="refresh_progress_3">#FFEB3B</color>
 
     <color name="weibo_vip">#F46200</color>
+    <!--微博item的其他设置-->
+    <color name="weibo_content_keyword">#507daf</color><!--关键词高亮-->
 
 </resources>
