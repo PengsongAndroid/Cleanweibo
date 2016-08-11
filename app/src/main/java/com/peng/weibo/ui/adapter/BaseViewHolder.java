@@ -20,6 +20,8 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.peng.weibo.widget.emojitextview.EmojiTextView;
+
 /**
  * Created by PS on 2016/8/1.
  */
@@ -63,6 +65,19 @@ public class BaseViewHolder  extends RecyclerView.ViewHolder{
             view.setText(value);
             return this;
         }
+
+    /**
+     * Will set the text of a TextView.
+     *
+     * @param viewId The view id.
+     * @param value  The text to put in the text view.
+     * @return The BaseViewHolder for chaining.
+     */
+    public BaseViewHolder setEmojiText(int viewId, CharSequence value) {
+        EmojiTextView view = getView(viewId);
+        view.setText(value);
+        return this;
+    }
 
         /**
          * Will set the image of an ImageView from a resource id.

@@ -44,7 +44,7 @@ public class HomePagePresenter implements HomePageContract.Present{
 
                     @Override
                     public void onNext(StatusList s) {
-                        Logs.d("onNext : " + s.toString());
+                        Logs.d("onNext : " + s.statuses.toString());
                         view.setData(s);
                     }
                 });

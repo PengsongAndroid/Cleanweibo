@@ -80,7 +80,7 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 				helper.setText(R.id.weibo_status_profile_name, item.user.name)
 				.setText(R.id.weibo_status_profile_time, item.created_at)
 				.setText(R.id.weibo_status_weiboComeFrom, item.source)
-				.setText(R.id.weibo_status_content, item.text)
+				.setEmojiText(R.id.weibo_status_content, item.text)
 				.setText(R.id.weibo_status_redirect, item.reposts_count + "")
 				.setText(R.id.weibo_status_comment, item.comments_count + "")
 				.setText(R.id.weibo_status_feedlike, item.attitudes_count + "");
