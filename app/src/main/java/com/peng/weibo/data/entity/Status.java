@@ -352,4 +352,5 @@ public class Status implements Parcelable {
 			return new Status[size];
 		}
 	};
+
 }

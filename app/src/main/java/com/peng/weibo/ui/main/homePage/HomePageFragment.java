@@ -14,6 +14,7 @@ import com.peng.weibo.data.entity.list.StatusList;
 import com.peng.weibo.ui.BaseFragment;
 import com.peng.weibo.ui.adapter.BaseQuickAdapter;
 import com.peng.weibo.ui.adapter.BaseViewHolder;
+import com.peng.weibo.util.common.MatchUtil;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -79,7 +80,7 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 //				}
 				helper.setText(R.id.weibo_status_profile_name, item.user.name)
 				.setText(R.id.weibo_status_profile_time, item.created_at)
-				.setText(R.id.weibo_status_weiboComeFrom, item.source)
+				.setText(R.id.weibo_status_weiboComeFrom, MatchUtil.patternCode(item.source))
 				.setEmojiText(R.id.weibo_status_content, item.text)
 				.setText(R.id.weibo_status_redirect, item.reposts_count + "")
 				.setText(R.id.weibo_status_comment, item.comments_count + "")
