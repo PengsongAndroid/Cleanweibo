@@ -14,4 +14,11 @@ public class WeiboList {
 
     public ArrayList<Weibo> cards = new ArrayList<Weibo>();
 
+    @Override
+    public String toString() {
+        return "WeiboList{" +
+                "cardlistInfo=" + cardlistInfo.toString() +
+                ", cards=" + cards.toString() +
+                '}';
+    }
 }

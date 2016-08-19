@@ -1,6 +1,7 @@
 package com.peng.weibo.ui.main.homePage;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.peng.weibo.data.entity.list.StatusList;
 import com.peng.weibo.ui.BasePresenter;

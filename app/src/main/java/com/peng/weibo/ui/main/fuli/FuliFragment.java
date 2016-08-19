@@ -1,17 +1,15 @@
 package com.peng.weibo.ui.main.fuli;
 
-import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import butterknife.Bind;
+
 import com.peng.weibo.R;
 import com.peng.weibo.ui.BaseFragment;
 import com.peng.weibo.ui.main.homePage.HomePageAdapter;
-import com.peng.weibo.ui.main.homePage.HomePageContract;
-
-import butterknife.Bind;
 
 /**
  * Created by PS on 2016/7/18.

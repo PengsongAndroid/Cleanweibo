@@ -73,11 +73,7 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 		homeRecyclerview.setAdapter(new BaseQuickAdapter<Status>(R.layout.weibo_status_item, weiboData) {
 			@Override
 			protected void convert(BaseViewHolder helper, Status item) {
-//				try {
-//					helper.setImageBitmap(R.id.weibo_status_head_image, Picasso.with(context).load(item.user.avatar_large).get());
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
+				helper.setImageBitmap(R.id.weibo_status_head_image, item.user.avatar_large, context);
 				helper.setText(R.id.weibo_status_profile_name, item.user.name)
 				.setText(R.id.weibo_status_profile_time, item.created_at)
 				.setText(R.id.weibo_status_weiboComeFrom, MatchUtil.patternCode(item.source))

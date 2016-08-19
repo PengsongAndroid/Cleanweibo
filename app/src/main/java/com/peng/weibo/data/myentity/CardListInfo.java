@@ -30,6 +30,26 @@ public class CardListInfo {
     public String show_style;
     public String can_shared;
     public String since_id;
+
+    @Override
+    public String toString() {
+        return "CardListInfo{" +
+                "v_p='" + v_p + '\'' +
+                ", statistics_from='" + statistics_from + '\'' +
+                ", containerid='" + containerid + '\'' +
+                ", title_top='" + title_top + '\'' +
+                ", show_style='" + show_style + '\'' +
+                ", can_shared='" + can_shared + '\'' +
+                ", since_id='" + since_id + '\'' +
+                ", cardlist_title='" + cardlist_title + '\'' +
+                ", desc='" + desc + '\'' +
+                ", cardlist_head_cards='" + cardlist_head_cards + '\'' +
+                ", page_type='" + page_type + '\'' +
+                ", background='" + background + '\'' +
+                ", cardlist_menus='" + cardlist_menus + '\'' +
+                '}';
+    }
+
     public String cardlist_title;
     public String desc;
     public String cardlist_head_cards;

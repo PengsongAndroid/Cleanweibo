@@ -21,6 +21,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.peng.weibo.widget.emojitextview.EmojiTextView;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by PS on 2016/8/1.
@@ -151,6 +152,12 @@ public class BaseViewHolder  extends RecyclerView.ViewHolder{
         public BaseViewHolder setImageBitmap(int viewId, Bitmap bitmap) {
             ImageView view = getView(viewId);
             view.setImageBitmap(bitmap);
+            return this;
+        }
+
+        public BaseViewHolder setImageBitmap(int viewId, String url, Context context) {
+            ImageView view = getView(viewId);
+            Picasso.with(context).load(url).into(view);
             return this;
         }
 
