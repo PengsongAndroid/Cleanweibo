@@ -14,10 +14,8 @@ import com.peng.weibo.data.entity.list.StatusList;
 import com.peng.weibo.ui.BaseFragment;
 import com.peng.weibo.ui.adapter.BaseQuickAdapter;
 import com.peng.weibo.ui.adapter.BaseViewHolder;
-import com.peng.weibo.util.common.MatchUtil;
-import com.squareup.picasso.Picasso;
+import com.peng.weibo.util.common.TransferUtil;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -56,6 +54,22 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 		linearLayoutManager = new LinearLayoutManager(getActivity());
 		linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 		homeRecyclerview.setLayoutManager(linearLayoutManager);
+		homeRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+			}
+
+			@Override
+			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+				super.onScrolled(recyclerView, dx, dy);
+				if (dy > 0){//up
+					
+				} else {//down
+
+				}
+			}
+		});
 		// 设置adapter
 		swiperLayout.setColorSchemeResources(R.color.refresh_progress_2,
 				R.color.refresh_progress_3);
@@ -76,8 +90,8 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 				helper.setImageBitmap(R.id.weibo_status_head_image, item.user.avatar_large, context);
 				helper.setText(R.id.weibo_status_profile_name, item.user.name)
 				.setText(R.id.weibo_status_profile_time, item.created_at)
-				.setText(R.id.weibo_status_weiboComeFrom, MatchUtil.patternCode(item.source))
-				.setEmojiText(R.id.weibo_status_content, item.text)
+				.setText(R.id.weibo_status_weiboComeFrom, TransferUtil.patternCode(item.source))
+				.setEmojiText(R.id.weibo_status_content, item.text, context)
 				.setText(R.id.weibo_status_redirect, item.reposts_count + "")
 				.setText(R.id.weibo_status_comment, item.comments_count + "")
 				.setText(R.id.weibo_status_feedlike, item.attitudes_count + "");
@@ -126,6 +140,8 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 		swiperLayout.setRefreshing(false);
 		swiperLayout.setEnabled(true);
 	}
+
+
 
 	@Override
 	public Context getViewContext() {

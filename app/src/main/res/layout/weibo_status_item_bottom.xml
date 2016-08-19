@@ -3,6 +3,7 @@
     android:id="@+id/bottombar_layout"
     android:layout_width="match_parent"
     android:layout_height="36dp"
+    android:layout_below="@+id/weibo_status_image"
     android:background="@color/white"
     android:orientation="vertical">
 

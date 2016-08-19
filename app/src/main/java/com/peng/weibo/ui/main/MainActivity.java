@@ -221,6 +221,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 		}
 	}
 
+	public void setFabVisible(boolean flag){
+		if (flag){
+			materialSheetFab.showFab();
+		} else {
+			materialSheetFab.hideSheet();
+		}
+	}
+
 	@Override
 	public Context getViewContext() {
 		return getApplicationContext();
