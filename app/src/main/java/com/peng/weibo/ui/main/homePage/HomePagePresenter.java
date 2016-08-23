@@ -24,8 +24,6 @@ public class HomePagePresenter implements HomePageContract.Present{
 
     private HomePageContract.View view;
 
-    private Bitmap bitmap;
-
     public HomePagePresenter(HomePageContract.View view){
         this.view = view;
     }

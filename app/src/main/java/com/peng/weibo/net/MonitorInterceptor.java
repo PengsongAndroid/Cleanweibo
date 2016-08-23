@@ -1,6 +1,7 @@
 package com.peng.weibo.net;
 
 import com.peng.weibo.util.tools.Logs;
+import com.socks.library.KLog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,8 +36,8 @@ public class MonitorInterceptor implements Interceptor{
         } else if (request.method().equals("DELETE")) {
             Logs.d(String.format("DELETE " +  request.url(), time, request.headers(), response.code(), response.headers()));
         }
-//        InputStream inputStream = response.body().byteStream();
-//        Logs.d("response : " + convertStreamToString(inputStream));
+        InputStream inputStream = response.newBuilder().build().body().byteStream();
+        KLog.d("response : " + convertStreamToString(inputStream));
         return response;
     }
 
@@ -48,13 +49,13 @@ public class MonitorInterceptor implements Interceptor{
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
             }
-            reader.reset();
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
         finally {
             try {
-                is.reset();
+                is.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

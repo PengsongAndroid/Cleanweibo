@@ -15,6 +15,8 @@ import com.peng.weibo.ui.BaseFragment;
 import com.peng.weibo.ui.adapter.BaseQuickAdapter;
 import com.peng.weibo.ui.adapter.BaseViewHolder;
 import com.peng.weibo.util.common.TransferUtil;
+import com.peng.weibo.util.task.CommonEvent;
+import com.peng.weibo.util.task.RxBus;
 
 import java.util.List;
 
@@ -36,6 +38,9 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 	private List<Status> weiboData;
 
 	private Context context;
+
+	private static final int HIDE_FAB = 0x001;
+	private static final int SHWO_FAB = 0x002;
 
 	public static HomePageFragment newInstance() {
 		return new HomePageFragment();
@@ -64,15 +69,14 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 				super.onScrolled(recyclerView, dx, dy);
 				if (dy > 0){//up
-					
+					RxBus.$().post("MainActivity", new CommonEvent(HIDE_FAB));
 				} else {//down
-
+					RxBus.$().post("MainActivity", new CommonEvent(SHWO_FAB));
 				}
 			}
 		});
 		// 设置adapter
-		swiperLayout.setColorSchemeResources(R.color.refresh_progress_2,
-				R.color.refresh_progress_3);
+		swiperLayout.setColorSchemeResources(R.color.refresh_progress_2, R.color.refresh_progress_3);
 		swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
@@ -87,8 +91,8 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 		homeRecyclerview.setAdapter(new BaseQuickAdapter<Status>(R.layout.weibo_status_item, weiboData) {
 			@Override
 			protected void convert(BaseViewHolder helper, Status item) {
-				helper.setImageBitmap(R.id.weibo_status_head_image, item.user.avatar_large, context);
-				helper.setText(R.id.weibo_status_profile_name, item.user.name)
+				helper.setImageBitmap(R.id.weibo_status_head_image, item.user.avatar_large, context)
+				.setText(R.id.weibo_status_profile_name, item.user.name)
 				.setText(R.id.weibo_status_profile_time, item.created_at)
 				.setText(R.id.weibo_status_weiboComeFrom, TransferUtil.patternCode(item.source))
 				.setEmojiText(R.id.weibo_status_content, item.text, context)
@@ -140,8 +144,6 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 		swiperLayout.setRefreshing(false);
 		swiperLayout.setEnabled(true);
 	}
-
-
 
 	@Override
 	public Context getViewContext() {

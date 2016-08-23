@@ -18,13 +18,18 @@ import android.view.View;
 import android.widget.TextView;
 
 import butterknife.Bind;
+import rx.Observable;
+import rx.functions.Action1;
 
 import com.gordonwong.materialsheetfab.DimOverlayFrameLayout;
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 import com.peng.weibo.R;
+import com.peng.weibo.data.myentity.Tag;
 import com.peng.weibo.data.test;
 import com.peng.weibo.ui.BaseActivity;
+import com.peng.weibo.util.task.CommonEvent;
+import com.peng.weibo.util.task.RxBus;
 import com.peng.weibo.util.tools.Logs;
 import com.peng.weibo.util.tools.Toasts;
 import com.peng.weibo.widget.fabsheet.Fab;
@@ -63,9 +68,26 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
 	private MainContract.Present present;
 
+	private static final int HIDE_FAB = 0x001;
+	private static final int SHWO_FAB = 0x002;
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Observable<CommonEvent> observable = RxBus.$().register(TAG);
+		RxBus.$().OnEvent(observable, new Action1<Object>() {
+			@Override
+			public void call(Object o) {
+				if (o instanceof CommonEvent){
+					CommonEvent event = (CommonEvent) o;
+					if (((CommonEvent) o).getWhat() == SHWO_FAB){
+						setFabVisible(true);
+					} else	if (((CommonEvent) o).getWhat() == HIDE_FAB){
+						setFabVisible(false);
+					}
+				}
+			}
+		});
 	}
 
 	@Override
@@ -94,10 +116,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 		setTab();
 		initNavigationView();
 		present.getUser();
-	}
-
-	public void setData() {
-
 	}
 
 	private void setupActionBar() {
@@ -221,11 +239,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 		}
 	}
 
-	public void setFabVisible(boolean flag){
+	private void setFabVisible(boolean flag){
 		if (flag){
-			materialSheetFab.showFab();
+			fab.show();
 		} else {
-			materialSheetFab.hideSheet();
+			fab.hide();
 		}
 	}
 
