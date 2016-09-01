@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -24,11 +25,14 @@ public class PengApi {
 
 	// 构造方法私有
 	private PengApi() {
+		//打印log body
+		HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+		logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
 		OkHttpClient okHttpClient = new OkHttpClient.Builder()
 				.readTimeout(HTTP_READ_TIMEOUT, TimeUnit.MILLISECONDS)
 				.connectTimeout(HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
-				.addInterceptor(new MonitorInterceptor())
+				.addInterceptor(logging)
 				.build();
 
 		Gson gson = new GsonBuilder()
