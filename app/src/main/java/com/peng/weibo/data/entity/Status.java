@@ -146,6 +146,7 @@ public class Status implements Parcelable {
 	public String singleImgSizeType;
 
 	public static class PicUrlsBean implements Parcelable {
+
 		public String thumbnail_pic;
 
 		@Override

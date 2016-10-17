@@ -86,8 +86,6 @@ public class FillContentHelper {
                 status.origin_pic_urls.add(picUrlsBean.thumbnail_pic.replace("thumbnail", "large"));
             }
         }
-
-
     }
 
     /**

@@ -12,16 +12,18 @@ import com.peng.weibo.ui.BaseView;
  */
 public interface HomePageContract {
 
-    interface View extends BaseView<Present>{
-        void startRefresh();
-        void stopRefresh();
-        Context getViewContext();
-        void setData(StatusList data);
-    }
+	interface View extends BaseView<Present> {
+		void startRefresh();
 
-    interface Present extends BasePresenter{
-        void getHomeWb(long since_id, long max_id, int count, int page, int base_app, int featureType,
-                       int trim_user);
-    }
+		void stopRefresh();
+
+		Context getViewContext();
+
+		void setData(StatusList data);
+	}
+
+	interface Present extends BasePresenter {
+		void getHomeWb(long since_id, long max_id, int count, int page, int base_app, int featureType, int trim_user);
+	}
 
 }

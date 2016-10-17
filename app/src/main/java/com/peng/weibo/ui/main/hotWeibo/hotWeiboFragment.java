@@ -17,88 +17,85 @@ import butterknife.Bind;
  */
 public class hotWeiboFragment extends BaseFragment implements hotWeiboContract.View {
 
-    @Bind(R.id.publicWbSwiperLayout)
-    SwipeRefreshLayout swiperLayout;
+	@Bind(R.id.publicWbSwiperLayout)
+	SwipeRefreshLayout swiperLayout;
 
-    @Bind(R.id.publicWbRecyclerView)
-    RecyclerView recyclerview;
+	@Bind(R.id.publicWbRecyclerView)
+	RecyclerView recyclerview;
 
-    private LinearLayoutManager linearLayoutManager;
+	private final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
 
-    private hotWeiboContract.Present present;
+	private hotWeiboContract.Present present;
 
-    public static hotWeiboFragment newInstance() {
-        return new hotWeiboFragment();
-    }
+	public static hotWeiboFragment newInstance() {
+		return new hotWeiboFragment();
+	}
 
-    @Override
-    protected int getLayoutResId() {
-        return R.layout.main_public_wb_layout;
-    }
+	@Override
+	protected int getLayoutResId() {
+		return R.layout.main_public_wb_layout;
+	}
 
-    @Override
-    public void initView(View view) {
-        setPresenter(null);
-        // 创建manager
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerview.setLayoutManager(linearLayoutManager);
-        // 设置adapter
-        recyclerview.setAdapter(new HomePageAdapter(getContext(), 10));
-        swiperLayout.setColorSchemeResources(R.color.refresh_progress_2,
-                R.color.refresh_progress_3);
-        swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                present.getHotWeibo(10, 1, false);
-            }
-        });
-    }
+	@Override
+	public void initView(View view) {
+		setPresenter(null);
+		linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+		recyclerview.setLayoutManager(linearLayoutManager);
+		// 设置adapter
+		recyclerview.setAdapter(new HomePageAdapter(getContext(), 10));
+		swiperLayout.setColorSchemeResources(R.color.refresh_progress_2, R.color.refresh_progress_3);
+//		swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//			@Override
+//			public void onRefresh() {
+//				present.getHotWeibo(10, 1, false);
+//			}
+//		});
+	}
 
-    @Override
-    public void setHotWeiboData() {
+	@Override
+	public void setHotWeiboData() {
 
-    }
+	}
 
-    public void setRefreshing(boolean isRefresh){
-        if (isRefresh){
-            swiperLayout.setEnabled(false);
-            swiperLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    swiperLayout.setEnabled(true);
-                    swiperLayout.setRefreshing(false);
-                }
-            }, 1000);
-        } else {
-            swiperLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    swiperLayout.setRefreshing(false);
-                }
-            }, 1000);
-        }
-    }
+	public void setRefreshing(boolean isRefresh) {
+		if (isRefresh) {
+			swiperLayout.setEnabled(false);
+			swiperLayout.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					swiperLayout.setEnabled(true);
+					swiperLayout.setRefreshing(false);
+				}
+			}, 1000);
+		} else {
+			swiperLayout.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					swiperLayout.setRefreshing(false);
+				}
+			}, 1000);
+		}
+	}
 
-    @Override
-    public void startRefresh() {
-        swiperLayout.setRefreshing(true);
-        swiperLayout.setEnabled(false);
-    }
+	@Override
+	public void startRefresh() {
+		swiperLayout.setRefreshing(true);
+		swiperLayout.setEnabled(false);
+	}
 
-    @Override
-    public void stopRefresh() {
-        swiperLayout.setRefreshing(false);
-        swiperLayout.setEnabled(true);
-    }
+	@Override
+	public void stopRefresh() {
+		swiperLayout.setRefreshing(false);
+		swiperLayout.setEnabled(true);
+	}
 
-    @Override
-    public Context getViewContext() {
-        return getActivity().getApplicationContext();
-    }
+	@Override
+	public Context getViewContext() {
+		return getActivity().getApplicationContext();
+	}
 
-    @Override
-    public void setPresenter(hotWeiboContract.Present presenter) {
-        this.present = new hotWeiboPresent(this);
-    }
+	@Override
+	public void setPresenter(hotWeiboContract.Present presenter) {
+		this.present = new hotWeiboPresent(this);
+	}
 }

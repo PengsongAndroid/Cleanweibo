@@ -15,80 +15,77 @@ import com.peng.weibo.ui.main.homePage.HomePageAdapter;
  * Created by PS on 2016/7/18.
  */
 public class FuliFragment extends BaseFragment implements FuliContract.View {
-    @Bind(R.id.swiperLayout)
-    SwipeRefreshLayout swiperLayout;
 
-    @Bind(R.id.homeRecyclerView)
-    RecyclerView homeRecyclerview;
+	@Bind(R.id.swiperLayout)
+	SwipeRefreshLayout swiperLayout;
 
-    private LinearLayoutManager linearLayoutManager;
+	@Bind(R.id.homeRecyclerView)
+	RecyclerView homeRecyclerview;
 
-    public static FuliFragment newInstance() {
-        return new FuliFragment();
-    }
+	private final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
 
-    @Override
-    protected int getLayoutResId() {
-        return R.layout.main_tab1;
-    }
+	public static FuliFragment newInstance() {
+		return new FuliFragment();
+	}
 
-    @Override
-    public void initView(View view) {
-        // 创建manager
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        homeRecyclerview.setLayoutManager(linearLayoutManager);
-        // 设置adapter
-        homeRecyclerview.setAdapter(new HomePageAdapter(getContext(), 10));
-        swiperLayout.setColorSchemeResources(R.color.refresh_progress_2,
-                R.color.refresh_progress_3);
-        swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                setRefreshing(swiperLayout.isRefreshing());
-            }
-        });
-    }
+	@Override
+	protected int getLayoutResId() {
+		return R.layout.main_tab1;
+	}
 
-    public void requestDataRefresh() {
+	@Override
+	public void initView(View view) {
+		linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+		homeRecyclerview.setLayoutManager(linearLayoutManager);
+		// 设置adapter
+		homeRecyclerview.setAdapter(new HomePageAdapter(getContext(), 10));
+		swiperLayout.setColorSchemeResources(R.color.refresh_progress_2, R.color.refresh_progress_3);
+		swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				setRefreshing(swiperLayout.isRefreshing());
+			}
+		});
+	}
 
-    }
+	public void requestDataRefresh() {
 
-    public void setRefreshing(boolean isRefresh){
-        if (isRefresh){
-            swiperLayout.setEnabled(false);
-            swiperLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    swiperLayout.setEnabled(true);
-                    swiperLayout.setRefreshing(false);
-                }
-            }, 1000);
-//			swiperLayout.setRefreshing(false);
-        } else {
-            swiperLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    swiperLayout.setRefreshing(false);
-                }
-            }, 1000);
-        }
-    }
+	}
 
-    @Override
-    public void startRefresh() {
-        swiperLayout.setRefreshing(true);
-        swiperLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swiperLayout.setRefreshing(false);
-            }
-        }, 1000);
-    }
+	public void setRefreshing(boolean isRefresh) {
+		if (isRefresh) {
+			swiperLayout.setEnabled(false);
+			swiperLayout.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					swiperLayout.setEnabled(true);
+					swiperLayout.setRefreshing(false);
+				}
+			}, 1000);
+			// swiperLayout.setRefreshing(false);
+		} else {
+			swiperLayout.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					swiperLayout.setRefreshing(false);
+				}
+			}, 1000);
+		}
+	}
 
+	@Override
+	public void startRefresh() {
+		swiperLayout.setRefreshing(true);
+		swiperLayout.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				swiperLayout.setRefreshing(false);
+			}
+		}, 1000);
+	}
 
-    @Override
-    public void setPresenter(FuliContract.Present presenter) {
+	@Override
+	public void setPresenter(FuliContract.Present presenter) {
 
-    }
+	}
 }

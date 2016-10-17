@@ -41,4 +41,18 @@
     <dimen name="weibo_status_head_pic">38dp</dimen>
     <dimen name="weibo_status_bottom_pic">15dp</dimen>
 
+    <!-- 微博图片尺寸 -->
+
+    <!--微博图片尺寸，竖直方向的长方形尺寸，适用于长微博和height比较大的图片-->
+    <dimen name="weibo_status_imagesize_vertical_rectangle_height">225dp</dimen>
+    <dimen name="weibo_status_imagesize_vertical_rectangle_width">170dp</dimen>
+
+    <!--微博图片尺寸，水平方向的长方形尺寸，适用于width比较大的图片-->
+    <dimen name="weibo_status_imagesize_horizontal_rectangle_height">170dp</dimen>
+    <dimen name="weibo_status_imagesize_horizontal_rectangle_width">225dp</dimen>
+
+    <!--微博图片尺寸，正方形尺寸，适用于width和height不大的图片-->
+    <dimen name="weibo_status_imagesize_square_height">38dp</dimen>
+    <dimen name="weibo_status_imagesize_square_width">38dp</dimen>
+
 </resources>

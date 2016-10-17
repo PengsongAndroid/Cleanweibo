@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <ImageView
@@ -34,7 +34,7 @@
                 android:id="@+id/weibo_status_profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="红楼"
+                android:text="测试"
                 android:textColor="@color/weibo_vip"
                 android:textSize="@dimen/text14" />
 

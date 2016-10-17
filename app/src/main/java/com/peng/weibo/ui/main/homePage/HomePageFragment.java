@@ -31,7 +31,8 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 	@Bind(R.id.homeRecyclerView)
 	RecyclerView homeRecyclerview;
 
-	private LinearLayoutManager linearLayoutManager;
+	//不用final会导致滑动时崩溃 原因 http://stackoverflow.com/questions/27416834/app-crashing-when-trying-to-use-recyclerview-on-android-5-0
+	private final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
 
 	private HomePageContract.Present presenter;
 
@@ -55,8 +56,6 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 	public void initView(View view) {
 		setPresenter(null);
 		context = getActivity();
-		// 创建manager
-		linearLayoutManager = new LinearLayoutManager(getActivity());
 		linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 		homeRecyclerview.setLayoutManager(linearLayoutManager);
 		homeRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -92,6 +91,7 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 			@Override
 			protected void convert(BaseViewHolder helper, Status item) {
 				helper.setImageBitmap(R.id.weibo_status_head_image, item.user.avatar_large, context)
+				.setImageList(R.id.weibo_status_image, item.pic_urls, context)
 				.setText(R.id.weibo_status_profile_name, item.user.name)
 				.setText(R.id.weibo_status_profile_time, item.created_at)
 				.setText(R.id.weibo_status_weiboComeFrom, TransferUtil.patternCode(item.source))
