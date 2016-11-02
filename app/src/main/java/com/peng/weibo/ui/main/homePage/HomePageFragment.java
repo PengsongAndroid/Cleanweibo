@@ -36,7 +36,7 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 
 	private HomePageContract.Present presenter;
 
-	private List<Status> weiboData;
+	private List<com.peng.weibo.data.myentity.Status> weiboData;
 
 	private Context context;
 
@@ -79,22 +79,22 @@ public class HomePageFragment extends BaseFragment implements HomePageContract.V
 		swiperLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
-				presenter.getHomeWb(0, 0, 5, 1, 0, 0, 0);
+				presenter.getHomeWb();
 			}
 		});
 	}
 
 	@Override
-	public void setData(StatusList data) {
+	public void setData(com.peng.weibo.data.myentity.list.StatusList data) {
 		weiboData = data.statuses;
-		homeRecyclerview.setAdapter(new BaseQuickAdapter<Status>(R.layout.weibo_status_item, weiboData) {
+		homeRecyclerview.setAdapter(new BaseQuickAdapter<com.peng.weibo.data.myentity.Status>(R.layout.weibo_status_item, weiboData) {
 			@Override
-			protected void convert(BaseViewHolder helper, Status item) {
-				helper.setImageBitmap(R.id.weibo_status_head_image, item.user.avatar_large, context)
-				.setImageList(R.id.weibo_status_image, item.pic_urls, context)
-				.setText(R.id.weibo_status_profile_name, item.user.name)
+			protected void convert(BaseViewHolder helper, com.peng.weibo.data.myentity.Status item) {
+				helper.setImageBitmap(R.id.weibo_status_head_image, "test", context)
+//				.setWeiboImageList(R.id.weibo_status_image, item.pic_infos, context)
+				.setText(R.id.weibo_status_profile_name, "test")
 				.setText(R.id.weibo_status_profile_time, item.created_at)
-				.setText(R.id.weibo_status_weiboComeFrom, TransferUtil.patternCode(item.source))
+				.setText(R.id.weibo_status_weiboComeFrom, TransferUtil.patternCode(""))
 				.setEmojiText(R.id.weibo_status_content, item.text, context)
 				.setText(R.id.weibo_status_redirect, item.reposts_count + "")
 				.setText(R.id.weibo_status_comment, item.comments_count + "")

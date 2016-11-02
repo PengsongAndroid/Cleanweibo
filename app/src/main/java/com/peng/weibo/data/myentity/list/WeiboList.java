@@ -1,7 +1,7 @@
 package com.peng.weibo.data.myentity.list;
 
 import com.peng.weibo.data.myentity.CardListInfo;
-import com.peng.weibo.data.myentity.Weibo;
+import com.peng.weibo.data.myentity.Status;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class WeiboList {
 
     public CardListInfo cardlistInfo;
 
-    public ArrayList<Weibo> cards = new ArrayList<Weibo>();
+    public ArrayList<Status> cards = new ArrayList<Status>();
 
     @Override
     public String toString() {

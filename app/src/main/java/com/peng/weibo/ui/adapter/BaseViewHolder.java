@@ -30,6 +30,8 @@ import android.widget.TextView;
 
 import com.peng.weibo.R;
 import com.peng.weibo.data.entity.Status;
+import com.peng.weibo.data.myentity.PicDetail;
+import com.peng.weibo.data.myentity.PicUrlDetail;
 import com.peng.weibo.util.common.Constants;
 import com.peng.weibo.util.common.TransferUtil;
 import com.peng.weibo.util.tools.Logs;
@@ -40,6 +42,7 @@ import com.squareup.picasso.Target;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import rx.Observable;
 
@@ -197,68 +200,45 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 	public BaseViewHolder setImageList(final int viewId, ArrayList<Status.PicUrlsBean> url, final Context context) {
 		if (url.size() > 0) {
 			RecyclerView imageList = getView(viewId);
-			ArrayList<String> urls = new ArrayList<String>();
-			for (int i = 0; i < url.size(); i++) {
-				urls.add(url.get(i).thumbnail_pic);
-			}
-			final GridLayoutManager gridLayoutManager = initGridLayoutManager(urls, context);
+			Random random = new Random();
+			int type = random.nextInt(3);
+			final WrapGridLayoutManager gridLayoutManager = initGridLayoutManager(url.size(), context);
 			imageList.setVisibility(View.GONE);
 			imageList.setVisibility(View.VISIBLE);
 			imageList.requestLayout();
 			imageList.setLayoutManager(gridLayoutManager);
 			imageList.setHasFixedSize(true);
 			imageList.setAdapter(new BaseQuickAdapter<Status.PicUrlsBean>(R.layout.item_image, url) {
-
 				@Override
 				protected void convert(BaseViewHolder helper, Status.PicUrlsBean item) {
-//					helper.setImageBitmap(R.id.item_image, item.thumbnail_pic, context);
-
+					helper.setImageBitmap(R.id.weibo_item_image, item.thumbnail_pic, context);
 				}
 			});
 		}
-
-		// if (url.size() > 0){
-		// Logs.e("size " + url.size());
-		// }
-		// final RecyclerView imageList = getView(viewId);
-		// imageList.setVisibility(View.VISIBLE);
-		// ArrayList<String> urlList = new ArrayList<String>();
-		// for (int i = 0; i < url.size(); i++){
-		// urlList.add(url.get(i).thumbnail_pic);
-		// }
-		// imageList.setLayoutManager(initGridLayoutManager(urlList, context));
-		// final ImageView view = new ImageView(context);
-		// //
-		// view.setImageDrawable(context.getResources().getDrawable(R.mipmap.message_image_default));
-		// // imageList.addView(view);
-		// Target target = new Target() {
-		// @Override
-		// public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-		// Logs.e("onBitmapLoaded");
-		// view.setImageBitmap(bitmap);
-		// // imageList.removeAllViews();
-		// imageList.
-		// imageList.addView(view, 1, RecyclerView.LayoutParams.WRAP_CONTENT);
-		// }
-		//
-		// @Override
-		// public void onBitmapFailed(Drawable errorDrawable) {
-		// Logs.e("onBitmapFailed");
-		// }
-		//
-		// @Override
-		// public void onPrepareLoad(Drawable placeHolderDrawable) {
-		// Logs.e("onPrepareLoad");
-		// }
-		// };
-		// for (int i = 0; i < url.size(); i++) {
-		// Picasso.with(context).load(urlList.get(i)).into(target);
-		// }
 		return this;
 	}
 
-	public void setWeiboItemImage(){
-
+	/**
+	 * 加载微博内容图片
+	 */
+	public BaseViewHolder setWeiboImageList(final int viewId, ArrayList<PicDetail> data, final Context context) {
+		if (data.size() > 0) {
+			//取出图片url
+			RecyclerView imageList = getView(viewId);
+			final WrapGridLayoutManager gridLayoutManager = initGridLayoutManager(data.size(), context);
+			imageList.setVisibility(View.GONE);
+			imageList.setVisibility(View.VISIBLE);
+			imageList.requestLayout();
+			imageList.setLayoutManager(gridLayoutManager);
+			imageList.setHasFixedSize(true);
+			imageList.setAdapter(new BaseQuickAdapter<PicDetail>(R.layout.item_image, data) {
+				@Override
+				protected void convert(BaseViewHolder helper, PicDetail item) {
+					helper.setImageBitmap(R.id.weibo_item_image, item.bmiddle.url, context);
+				}
+			});
+		}
+		return this;
 	}
 
 	/**
@@ -267,28 +247,28 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 	 *
 	 * @return
 	 */
-	private static GridLayoutManager initGridLayoutManager(ArrayList<String> imageDatas, Context context) {
-		GridLayoutManager gridLayoutManager;
-		if (imageDatas != null) {
-			switch (imageDatas.size()) {
+	private static WrapGridLayoutManager initGridLayoutManager(int size, Context context) {
+		WrapGridLayoutManager gridLayoutManager;
+		if (size != 0) {
+			switch (size) {
 			case 1:
-				gridLayoutManager = new GridLayoutManager(context, 1);
+				gridLayoutManager = new WrapGridLayoutManager(context, 1);
 				break;
 			case 2:
-				gridLayoutManager = new GridLayoutManager(context, 2);
+				gridLayoutManager = new WrapGridLayoutManager(context, 2);
 				break;
 			case 3:
-				gridLayoutManager = new GridLayoutManager(context, 3);
+				gridLayoutManager = new WrapGridLayoutManager(context, 3);
 				break;
 			case 4:
-				gridLayoutManager = new GridLayoutManager(context, 2);
+				gridLayoutManager = new WrapGridLayoutManager(context, 2);
 				break;
 			default:
-				gridLayoutManager = new GridLayoutManager(context, 3);
+				gridLayoutManager = new WrapGridLayoutManager(context, 3);
 				break;
 			}
 		} else {
-			gridLayoutManager = new GridLayoutManager(context, 3);
+			gridLayoutManager = new WrapGridLayoutManager(context, 3);
 		}
 		return gridLayoutManager;
 	}

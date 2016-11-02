@@ -63,7 +63,6 @@ public interface Constants {
     public static final long GROUP_TYPE_ALL = 0;//全部微博
     public static final long GROUP_TYPE_FRIENDS_CIRCLE = 1;//好友圈
 
-
     //评论页分组
     public static final int GROUP_COMMENT_TYPE_ALL = 0x12;//全部评论
     public static final int GROUP_COMMENT_TYPE_FRIENDS = 0x13;//关注的人

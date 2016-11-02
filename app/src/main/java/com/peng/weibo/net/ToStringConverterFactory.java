@@ -31,7 +31,6 @@ public class ToStringConverterFactory extends Converter.Factory  {
                 @Override
                 public String convert(ResponseBody value) throws IOException {
                     String result = value.toString();
-                    Logs.e(result);
                     return result;
                 }
             };
