@@ -19,4 +19,6 @@ public interface PsHttpService {
     @GET("/getHomeWeibo")
     @Headers("Connection:close")
     Observable<StatusList> getHomeWb();
+
+
 }

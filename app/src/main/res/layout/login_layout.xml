@@ -1,10 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/login_bg"
+    android:orientation="vertical">
 
-</RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/login_center_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white">
+
+
+                <!--<EditText-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="Password"-->
+                    <!--android:textColor="@color/login_text_color"-->
+                    <!--android:textColorHint="@color/login_hint_text_color"-->
+                    <!--android:textSize="@dimen/text14" />-->
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Already have a account"
+            android:textColor="@color/login_text_color"
+            android:textSize="@dimen/text14" />
+
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="58dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/login_btn_bg"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text22" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -28,4 +28,9 @@
     <!--微博item的其他设置-->
     <color name="weibo_content_keyword">#507daf</color><!--关键词高亮-->
 
+    <!--登录界面相关颜色-->
+    <color name="login_bg_color">#F2F2F2</color>
+    <color name="login_text_color">#0E95A1</color>
+    <color name="login_hint_text_color">#DCE1E1</color>
+
 </resources>
